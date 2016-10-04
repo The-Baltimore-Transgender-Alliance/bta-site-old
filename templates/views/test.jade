@@ -1,0 +1,38 @@
+extends ../layouts/default
+include ../mixins/lightbox
+
+block intro
+
+block content
+	.container 
+		.jumbotron
+			h1 Hi world
+			p ...
+			p <a>Learn More</a>
+		nav(aria-label='Page navigation')
+			ul.pagination
+				li
+					a(href='#', aria-label='Previous')
+						span(aria-hidden='true') <
+				li
+					a(href='#') 1
+				li
+					a(href='#') 2
+				li
+					a(href='#') 3
+				li.active
+					a(href='#') 4
+				li.disabled
+					a(href='#') 5
+				li
+					a(href='#', aria-label='Next')
+						span(aria-hidden='true') >
+		form.navbar-form.navbar-left(role='search')
+			.form-group
+				input.form-control(type='text', placeholder='Search')
+			button.btn.btn-default(type='submit') Submit
+	.parallax-window(data-parallax="scroll" data-image-src="/images/test-parallax.jpg")
+	.container
+		a(href="/images/test-parallax.jpg", data-lightbox="image-1")
+			img(src="/images/test-parallax.jpg")
+	+lightbox

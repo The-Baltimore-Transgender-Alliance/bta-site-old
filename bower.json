@@ -1,0 +1,21 @@
+{
+  "name": "bta-site",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/apathinwalking/bta-site",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "parallax.js": "^1.4.2",
+    "photoswipe": "^4.1.1",
+    "jquery": "2.1.4",
+    "bootstrap": "3.3.5"
+  }
+}
