@@ -16,6 +16,7 @@
     "parallax.js": "^1.4.2",
     "photoswipe": "^4.1.1",
     "jquery": "2.1.4",
-    "bootstrap": "3.3.5"
+    "bootstrap": "3.3.5",
+    "lodash": "^4.16.3"
   }
 }

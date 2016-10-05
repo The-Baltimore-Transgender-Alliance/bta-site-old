@@ -1,13 +1,24 @@
 extends ../layouts/default
+include ../mixins/photoswipe
+include ../mixins/photo-gallery
+script.
+	var pswpElement = document.querySelectorAll('.pswp')[0];
+	var options = {
+		index: 0
+	};
 
 block intro
 	.container
 		h1 Gallery
 	
 block content
+	+photoswipe
 	.container
 		if galleries.length
-			each gallery in galleries
+			each gallery, index in galleries
+				//- +photo-gallery(gallery, 'photo-gallery-' + index, '#pswp')
+				//- script.
+				//- 	photoItems = [];
 				h2= gallery.name
 					if gallery.publishedDate
 						.pull-right.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
@@ -16,15 +27,12 @@ block content
 					if gallery.heroImage.exists
 						.col-sm-4.col-md-4.gallery-image: img(src=gallery._.heroImage.limit(680,680)).img-rounded
 						.col-sm-8.col-md-8: .row
-							
-							each image in gallery.images
+							each image, index in gallery.images
 								.col-xs-4.col-sm-4.col-md-3.gallery-image
-									a(href=image.limit(1024,1024), data-lightbox=gallery.name)
-										img(src=image.limit(300,300)).img-rounded
+									img.gallery-image.img-rounded(src=image.limit(300,300), lrg=image.src(), lrg-w=image.width, lrg-h=image.height).img-rounded
 					else
-						each image in gallery.images
+						each image, index in gallery.images
 							.col-xs-6.col-sm-4.col-md-3.gallery-image
-								a(href=image.limit(1024,1024), data-lightbox=gallery.name)
-									img(src=image.limit(300,300)).img-rounded
+								img.gallery-image.img-rounded(src=image.limit(300,300), lrg=image.src lrg-w=image.width, lrg-h=image.height)
 		else
 			h3.text-muted There are no image galleries yet.

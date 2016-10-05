@@ -1,3 +1,9 @@
 {
-    "extends": "keystone"
+    "extends": "keystone",
+    "globals": {
+      "$": true,
+      "_": true,
+      "PhotoSwipe": true,
+      "PhotoSwipeUI_Default": true
+      }
 }

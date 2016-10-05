@@ -69,7 +69,10 @@ html(lang='en')
 		//- Lightbox JS
 		script(src='/libraries/photoswipe/dist/photoswipe.min.js')
 		script(src='/libraries/photoswipe/dist/photoswipe-ui-default.min.js')
-
+		
+		//- lodash
+		script(src='/libraries/lodash/dist/lodash.min.js')
+		
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone
 		if user && user.canAccessKeystone
@@ -77,7 +80,7 @@ html(lang='en')
 
 		//- Add scripts that are globally required by your site here.
 		// script(src="/js/init-parallax.js")
-		script(src='/js/init.js')
+		script(src='/js/initialize-photoswipe.js')
 
 		//- Include template-specific javascript files by extending the js block
 		block js

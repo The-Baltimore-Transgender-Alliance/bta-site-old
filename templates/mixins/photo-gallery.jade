@@ -1,0 +1,29 @@
+mixin photo-gallery(galleryObject, gallerySelector, photoSwipeId)
+    h2= galleryObject.name
+        if galleryObject.publishedDate
+            .pull-right.text-muted= galleryObject._.publishedDate.format('Do MMM YYYY')
+    script.
+        photoItems = [];
+    .row.gallery-images(class=gallerySelector)
+        each image, index in galleryObject.images
+            img(src=image.limit(300,300), class=' image-' + index).img-rounded
+            script.
+                photoItems.push({
+                    src: "!{image.src()}",
+                    w: 600,
+                    h: 600
+                });
+    script.
+        var initPhotoGallery = function(index){
+            var options = {};
+            options.index = index;
+            var pswpElement = document.querySelectorAll('!{photoSwipeId}')[0];
+            console.log(pswpElement);
+            var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, photoItems, options);
+        }
+        var galleryElements = document.querySelectorAll( '!{gallerySelector}' );
+        console.log(galleryElements);
+        initPhotoGallery();
+    script.
+        // console.log(photoItems)
+            
