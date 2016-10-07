@@ -1,11 +1,12 @@
 var pswpElement = $('.pswp')[0];
-var options = {};
 
 var galleryElements = $('.gallery-images');
 
 _.forEach(galleryElements, e => {
-	var imgs = $(e).find('img.gallery-image');
+	var imgs = $(e).find('.gallery-image img');
 	_.forEach(imgs, (img, i) => {
+		console.log(i);
+		var options = {};
 		options.index = i;
 		$(img).click(() => {
 			var items = parseThumbnails(imgs);

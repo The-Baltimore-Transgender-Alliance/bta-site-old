@@ -16,23 +16,20 @@ block content
 	.container
 		if galleries.length
 			each gallery, index in galleries
-				//- +photo-gallery(gallery, 'photo-gallery-' + index, '#pswp')
-				//- script.
-				//- 	photoItems = [];
 				h2= gallery.name
 					if gallery.publishedDate
 						.pull-right.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
 				
 				.row.gallery-images
 					if gallery.heroImage.exists
-						.col-sm-4.col-md-4.gallery-image: img(src=gallery._.heroImage.limit(680,680)).img-rounded
+						.col-sm-4.col-md-4.gallery-hero-image: img(src=gallery._.heroImage.limit(680,680)).img-rounded
 						.col-sm-8.col-md-8: .row
 							each image, index in gallery.images
 								.col-xs-4.col-sm-4.col-md-3.gallery-image
-									img.gallery-image.img-rounded(src=image.limit(300,300), lrg=image.src(), lrg-w=image.width, lrg-h=image.height).img-rounded
+									img.img-rounded(src=image.limit(300,400), lrg=image.src(), lrg-w=image.width, lrg-h=image.height).img-rounded
 					else
 						each image, index in gallery.images
 							.col-xs-6.col-sm-4.col-md-3.gallery-image
-								img.gallery-image.img-rounded(src=image.limit(300,300), lrg=image.src lrg-w=image.width, lrg-h=image.height)
+								img.img-rounded(src=image.limit(300,300), lrg=image.src lrg-w=image.width, lrg-h=image.height)
 		else
 			h3.text-muted There are no image galleries yet.

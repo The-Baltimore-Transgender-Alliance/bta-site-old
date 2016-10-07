@@ -1,5 +1,4 @@
 extends ../layouts/default
-include ../mixins/lightbox
 
 block intro
 
@@ -35,4 +34,20 @@ block content
 	.container
 		a(href="/images/test-parallax.jpg", data-lightbox="image-1")
 			img(src="/images/test-parallax.jpg")
-	+lightbox
+
+	nav.navbar.navbar-inverse
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#ex-navbar')
+					span.sr-only Toggle navigation
+					i.mdi.mdi-menu(aria-hidden='true')
+				a.navbar-brand(href='#')
+					i.mdi.mdi-package(aria-hidden='true')
+					| Brand
+			#ex-navbar.collapse.navbar-collapse
+				ul.nav.navbar-nav
+					li.active
+						a(href='#')
+							| Home
+							span.sr-only  (current page)
+					| ...
