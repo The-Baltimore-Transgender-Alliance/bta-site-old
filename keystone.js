@@ -47,6 +47,7 @@ keystone.set('nav', {
 	galleries: 'galleries',
 	enquiries: 'enquiries',
 	users: 'users',
+	about: ['member-orgs', 'leadership-team-members'],
 });
 
 // Start Keystone to connect to your database and initialise the web server

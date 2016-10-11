@@ -1,75 +1,109 @@
 extends ../layouts/default
 
 mixin post(post)
-	.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
-		h2: a(href='/blog/post/' + post.slug)= post.title
-		p.lead.text-muted Posted 
-			if post.publishedDate
-				| on #{post._.publishedDate.format('MMMM Do, YYYY')} 
+	.panel.post-panel
+		.panel-img-header
+			if(post.image.exists)
+				img.img-responsive.img-rounded(src=post._.image.src({width:600, height:400, crop:"fill"}))
+				h5.panel-img-header-text= post.title 
+		.panel-body
+			//- h4: a(href='/blog/post/' + post.slug)= post.title
+			//- .pull-right
+			//- 	if post.publishedDate
+			//- 		i.mdi.mdi-calendar.mdi-12px
+			//- 		| #{post._.publishedDate.format('MM/DD/YYYY')} 
+			//- 	if post.author
+			//- 		i.mdi.mdi-account.mdi-12px
+			//- 		| #{post.author.name.first}
+			.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+				if post.author
+					p.lead.text-muted
+						| #{post._.publishedDate.format('MMMM Do, YYYY')} 			
+				//- p.lead.text-muted Posted 
+				//- 	if post.publishedDate
+				//- 		| on #{post._.publishedDate.format('MM/DD/YYYY')} 
+				//- 	if post.categories && post.categories.length
+				//- 		| in 
+				//- 		each cat, i in post.categories
+				//- 			a(href='/blog/' + cat.key)= cat.name
+				//- 			if i < post.categories.length - 1
+				//- 				| , 
+				//- 			else
+				//- 				|  
+				//- 	if post.author
+				//- 		| by #{post.author.name.first}
+				//- if post.image.exists
+				//- 	img(src=post._.image.fit(160,160)).img.pull-right
+				p!= post.content.brief
+				if post.content.extended
+					p.read-more: a(href='/blog/post/' + post.slug) Read more...
+		.panel-footer
 			if post.categories && post.categories.length
-				| in 
 				each cat, i in post.categories
-					a(href='/blog/' + cat.key)= cat.name
+					a(href='/blog/' + cat.key): span.badge=cat.name
 					if i < post.categories.length - 1
-						| , 
-					else
-						|  
-			if post.author
-				| by #{post.author.name.first}
-		if post.image.exists
-			img(src=post._.image.fit(160,160)).img.pull-right
-		p!= post.content.brief
-		if post.content.extended
-			p.read-more: a(href='/blog/post/' + post.slug) Read more...
+						| &nbsp
+
 
 block intro
 	.container
 		h1= data.category ? data.category.name : 'Blog'
 
 block content
-	.container: .row
-		.col-sm-8.col-md-9
-			if filters.category && !data.category
-				h3.text-muted Invalid Category.
-			else
-				if data.posts.results.length
-					if data.posts.totalPages > 1
-						h4.text-weight-normal Showing 
-							strong #{data.posts.first}
-							|  to 
-							strong #{data.posts.last}
-							|  of 
-							strong #{data.posts.total}
-							|  posts.
-					else
-						h4.text-weight-normal Showing #{utils.plural(data.posts.results.length, '* post')}.
-					.blog
-						each post in data.posts.results
-							+post(post)
-					
-					if data.posts.totalPages > 1
-						ul.pagination
-							if data.posts.previous
-								li: a(href='?page=' + data.posts.previous): span.glyphicon.glyphicon-chevron-left
-							else
-								li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
-							each p, i in data.posts.pages
-								li(class=data.posts.currentPage == p ? 'active' : null)
-									a(href='?page=' + (p == '...' ? (i ? data.posts.totalPages : 1) : p ))= p
-							if data.posts.next
-								li: a(href='?page=' + data.posts.next): span.glyphicon.glyphicon-chevron-right
-							else
-								li.disabled: a(href='?page=' + data.posts.totalPages): span.entypo.glyphicon.glyphicon-chevron-right
+	.container: .row: .col-sm-12.col-md-12
+		if filters.category && !data.category
+			h3.text-muted Invalid Category.
+		else
+			if data.posts.results.length
+				if data.posts.totalPages > 1
+					h4.text-weight-normal Showing 
+						strong #{data.posts.first}
+						|  to 
+						strong #{data.posts.last}
+						|  of 
+						strong #{data.posts.total}
+						|  posts.
 				else
-					if data.category
-						h3.text-muted There are no posts in the category #{data.category.name}.
-					else
-						h3.text-muted There are no posts yet.
-		
-		if data.categories.length
-			.col-sm-4.col-md-3
-				h2 Categories
-				.list-group(style='margin-top: 70px;')
-					a(href='/blog', class=!data.category ? 'active' : false).list-group-item All Categories
-					each cat in data.categories
-						a(href='/blog/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name
+					h4.text-weight-normal Showing #{utils.plural(data.posts.results.length, '* post')}.
+	if (!filters.category || (filters.category && data.category)) && data.posts.results.length
+		.blog.container: .row
+			each post, index in data.posts.results
+				- if (index % 3 === 0) {
+					.clearfix.visible-md-block.visible-lg-block
+				- }
+				- if (index % 2 === 0) {
+					.clearfix.visible-sm-block
+				- }
+				- if (index % 1 === 0) {
+					.clearfix.visible-xs-block
+				- }
+						.col-lg-4.col-md-4.col-sm-6.col-xs-12
+							+post(post)
+	if data.categories.length
+		.container
+			//- h2 Categories
+			//- .list-group(style='margin-top: 70px;')
+			ul.nav.nav-pills
+				li(class=!data.category ? 'active' : false): a(href='/blog') All Categories
+				each cat in data.categories
+					li(class=data.category && data.category.id == cat.id ? 'active' : false): a(href='/blog/' + cat.key )= cat.name								
+	if data.posts.totalPages > 1
+		.container: .col-md-4.col-md-offset-4.text-center
+			ul.pagination
+				if data.posts.previous
+					li: a(href='?page=' + data.posts.previous): span.glyphicon.glyphicon-chevron-left
+				else
+					li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
+				each p, i in data.posts.pages
+					li(class=data.posts.currentPage == p ? 'active' : null)
+						a(href='?page=' + (p == '...' ? (i ? data.posts.totalPages : 1) : p ))= p
+				if data.posts.next
+					li: a(href='?page=' + data.posts.next): span.glyphicon.glyphicon-chevron-right
+				else
+					li.disabled: a(href='?page=' + data.posts.totalPages): span.entypo.glyphicon.glyphicon-chevron-right
+
+	else
+		if data.category
+			.container: h3.text-muted There are no posts in the category #{data.category.name}.
+		else
+			.container: h3.text-muted There are no posts yet.

@@ -17,19 +17,20 @@ block content
 		if galleries.length
 			each gallery, index in galleries
 				h2= gallery.name
-					if gallery.publishedDate
-						.pull-right.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
-				
+					//- if gallery.publishedDate
+					//- 	.pull-right.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
+					//- 
 				.row.gallery-images
 					if gallery.heroImage.exists
-						.col-sm-4.col-md-4.gallery-hero-image: img(src=gallery._.heroImage.limit(680,680)).img-rounded
-						.col-sm-8.col-md-8: .row
+						//- .row: .col-sm-4.col-md-4.gallery-hero-image
+						//- 	img(src=gallery._.heroImage.limit(680,680)).img-rounded
+						div
 							each image, index in gallery.images
-								.col-xs-4.col-sm-4.col-md-3.gallery-image
-									img.img-rounded(src=image.limit(300,400), lrg=image.src(), lrg-w=image.width, lrg-h=image.height).img-rounded
+								.col-xs-6.col-sm-4.col-md-3.gallery-image
+									img.img-rounded.img-thumbnail(src=image.src({height: 600, width:800, crop:'fill'}), lrg=image.src(), lrg-w=image.width, lrg-h=image.height)
 					else
 						each image, index in gallery.images
 							.col-xs-6.col-sm-4.col-md-3.gallery-image
-								img.img-rounded(src=image.limit(300,300), lrg=image.src lrg-w=image.width, lrg-h=image.height)
+								img.img-rounded(src=image.limit(350,150), lrg=image.src lrg-w=image.width, lrg-h=image.height)
 		else
 			h3.text-muted There are no image galleries yet.
