@@ -1,31 +1,54 @@
 extends ../layouts/default
-
-block content
+block intro
 	if data.post.image.exists
-		.parallax-window.top-align-parallax-window(data-parallax="scroll" data-image-src=data.post._.image.src())
-	.container: .row: .col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
-		article
-			p: a(href='/blog') &larr; back to the blog
-			hr
+		.post-page-intro-image.parallax-window(data-parallax="scroll" data-image-src=data.post._.image.src())
+	if data.post
+		.post-page-intro-text-container: .container: .row
+			.post-page-intro-text.col-md-8.col-md-offset-2.vcenter
+				h1=data.post.title
+			
+				
+block content
+	.post-page
+		.container: .row: .content-padding-row-sm
+		.container: .row: .col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+			article
+				.post-info
+					p: a(href='/blog') &larr; back to the blog
+					p.pull-right
+						if data.post.categories && data.post.categories.length
+							each cat, i in data.post.categories
+								a(href='/blog/' + cat.key): span.badge=cat.name
+								if i < data.post.categories.length - 1
+									| &nbsp
+					if data.post.author
+						span.mdi.mdi-account
+							| &nbsp#{data.post.author.name.first}&nbsp#{data.post.author.name.last}
+							&nbsp
+					if data.post.publishedDate
+						span.mdi.mdi-clock
+							| &nbsp#{data.post._.publishedDate.format('MMMM Do, YYYY')} 
+
+					hr
 			if !data.post
 				h2 Invalid Post.
 			else
 				header
-					h1= data.post.title
-					h5 Posted 
-						if data.post.publishedDate
-							| on #{data.post._.publishedDate.format('MMMM Do, YYYY')} 
-						if data.post.categories && data.post.categories.length
-							| in 
-							each cat, cat_i in data.post.categories
-								a(href='/blog/' + cat.key)= cat.name
-								if cat_i < data.post.categories.length - 1
-									| , 
-								else
-									|  
-						if data.post.author
-							| by #{data.post.author.name.first}
-				.post
-					if data.post.image.exists
-						.image-wrap: img(src=data.post._.image.fit(750,450)).img-responsive
+					//- h1= data.post.title
+					//- h5 Posted 
+					//- 	if data.post.publishedDate
+					//- 		| on #{data.post._.publishedDate.format('MMMM Do, YYYY')} 
+					//- 	if data.post.categories && data.post.categories.length
+					//- 		| in 
+					//- 		each cat, cat_i in data.post.categories
+					//- 			a(href='/blog/' + cat.key)= cat.name
+					//- 			if cat_i < data.post.categories.length - 1
+					//- 				| , 
+					//- 			else
+					//- 				|  
+					//- 	if data.post.author
+					//- 		| by #{data.post.author.name.first}
+				.post-content
+					//- if data.post.image.exists
+					//- 	.image-wrap: img(src=data.post._.image.fit(750,450)).img-responsive
 					!= data.post.content.full

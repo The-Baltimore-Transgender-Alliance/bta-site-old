@@ -15,9 +15,8 @@ html(lang='en')
 		//- Compiled User Styles (includes bootstrap)
 		link(href="/styles/site.min.css", rel="stylesheet")
 		
-		link(href="/libraries/mdi/css/materialdesignicons.min.css" rel="stylesheet")
-		
 		// - Other Libraries CSS		
+		link(href="/libraries/mdi/css/materialdesignicons.min.css" rel="stylesheet")
 	
 		// --- photoswipe css
 		link(rel='stylesheet', href='/libraries/photoswipe/dist/photoswipe.css')
@@ -29,8 +28,8 @@ html(lang='en')
 		
 		//- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 		//-[if lt IE 9]
-			script(src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
-			script(src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
+			//- script(src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
+			//- script(src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
 		//-[endif]
 
 		//- Include template-specific stylesheets by extending the css block
@@ -45,7 +44,8 @@ html(lang='en')
 		#body
 
 			//- The Intro block appears above flash messages (used for temporary information display)
-			block intro
+			#intro
+				block intro
 
 			//- Flash messages allow you to display once-off status messages to users, e.g. form
 			//- validation errors, success messages, etc.
@@ -64,6 +64,9 @@ html(lang='en')
 
 		//- Bootstrap
 		script(src='/libraries/bootstrap/dist/js/bootstrap.min.js')
+		
+		//- Bootstrap hover dropdown-menu
+		script(src='/libraries/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')
 		
 		//- Parallax effect
 		script(src='/libraries/parallax.js/parallax.min.js')

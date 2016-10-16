@@ -18,6 +18,7 @@
     "jquery": "2.1.4",
     "bootstrap": "3.3.5",
     "lodash": "^4.16.3",
-    "mdi": "^1.7.22"
+    "mdi": "^1.7.22",
+    "bootstrap-hover-dropdown": "^2.2.1"
   }
 }

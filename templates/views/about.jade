@@ -1,17 +1,21 @@
 extends ../layouts/default
 include ../mixins/parallax-section
-
+block intro
+	.intro-basic: .container
+		a(name='what'): h1 About
+		.row: .col-md-8: p We are a coalition of Trans led and Trans inclusive organizations in Baltimore City working towards the upward mobility and empowerment of Transgender residents through advocacy and education.
 block content
-	.container.about-text-section
-		a(name='whoweare'): h1 Who we are
-		p "At vero eos et accusamus et	.container.about-text-section iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
 	.parallax-window(data-parallax="scroll" data-image-src="/images/parallax-2.jpg")
 	.container.about-text-section
-		a(name='ourmission'): h1 Our Mission
-		p "At vero eos et accusamus et	.container.about-text-section iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+		a(name='mission'): h2 Our Mission
+		p The Baltimore Transgender Alliance works to uplift the voices of transgender and gender non-conforming people in Baltimore City and continually center our community’s needs in broader political conversations. In July of 2015, we held the Baltimore Trans Uprising protest to highlight the systemic injustices that leave trans women of color vulnerable to violence and harassment. In November of 2015, we participated in a national Trans March of Resilience to both honor the trans people who have died and demonstrate the strength and solidarity of community and our movement. We are parents, artists, business owners, students, and citizens representing ourselves in public and refusing to back down.
+	.parallax-window(data-parallax="scroll" data-image-src="/images/parallax-0.jpg")
+	.container.about-text-section
+		a(name='history'): h2 Our History
+		p The Baltimore Transgender Alliance was founded in the fall of 2014 as a coalition of transgender-led activist groups in Baltimore City.  Following the death of Mya Hall, an innocent transgender woman of color, at the hands of the Baltimore Police Department, we organized the #BmoreTransUprising protest and rally in July of 2015 to demand police accountability. In November of 2015, we organized as part of the National Transgender March of Resilience, held on Transgender Day of Remembrance, to honor the lives we’ve lost and push forward to a world without trans murder.
 	.parallax-window(data-parallax="scroll" data-image-src="/images/parallax-3.jpg")
 	.container.about-text-section
-		a(name='ourmembers'): h1 Our Leadership Team
+		a(name='members'): h2 Our Leadership Team
 		each member in data.leadershipTeamMembers
 			.well: .media
 				.media-left.media-middle: a(href='#'): img.media-object(src=member._.image.limit(128,128), style="border-radius:50%;")
@@ -22,7 +26,7 @@ block content
 			
 	.parallax-window(data-parallax="scroll" data-image-src="/images/parallax-4.jpg")
 	.container.about-text-section
-		a(name='ourmemberorgs'): h1 Our Member Organizations
+		a(name='orgs'): h2 Our Member Organizations
 		each org in data.memberOrgs
 			.well: .media
 				.media-left.media-middle: a(href='#'): img.media-object(src=org._.image.limit(128,128))
